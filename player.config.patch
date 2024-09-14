@@ -1,0 +1,10 @@
+[
+  [
+    { "op": "test", "path": "/genericScriptContexts/OpenStarbound" },
+    {
+      "op": "add",
+      "path": "/genericScriptContexts/pat_saveInventoryPosition",
+      "value": "/pat_saveInventoryPosition.lua"
+    }
+  ]
+]
