@@ -15,6 +15,13 @@ function init()
   local pos = root.getConfigurationPath(ConfigPath)
   if not pos then return end
 
+  local clamp = function(n, min, max) return math.max(min, math.min(n, max)) end
+  
+  local size = inv:getSize()
+  local bounds = interface.bindCanvas("voice"):size()
+  pos[1] = clamp(pos[1], 0, bounds[1] - size[1])
+  pos[2] = clamp(pos[2], 0, bounds[2] - size[2])
+
   local isDisplayed = inv.isDisplayed()
 
   interface.displayRegisteredPane(PaneName)
