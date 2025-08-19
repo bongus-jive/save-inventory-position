@@ -1,14 +1,15 @@
 local PaneName = "Inventory"
 local ConfigPath = "pat_inventoryPosition"
+local InvPane
 
 function init()
   script.setUpdateDelta(0)
 
-  local inv = interface.bindRegisteredPane(PaneName)
+  InvPane = interface.bindRegisteredPane(PaneName)
 
   message.setHandler("/resetinventoryposition", function(_, isLocal)
     if isLocal then
-      inv.setPosition({0, 0})
+      InvPane.setPosition({0, 0})
     end
   end)
 
@@ -17,22 +18,21 @@ function init()
 
   local clamp = function(n, min, max) return math.max(min, math.min(n, max)) end
   
-  local size = inv:getSize()
+  local size = InvPane:getSize()
   local bounds = interface.bindCanvas("voice"):size()
   pos[1] = clamp(pos[1], 0, bounds[1] - size[1])
   pos[2] = clamp(pos[2], 0, bounds[2] - size[2])
 
-  local isDisplayed = inv.isDisplayed()
+  local isDisplayed = InvPane.isDisplayed()
 
   interface.displayRegisteredPane(PaneName)
-  inv.setPosition(pos)
+  InvPane.setPosition(pos)
 
   if not isDisplayed then
-    inv.dismiss()
+    InvPane.dismiss()
   end
 end
 
 function uninit()
-  local inv = interface.bindRegisteredPane(PaneName)
-  root.setConfigurationPath(ConfigPath, inv.getPosition())
+  root.setConfigurationPath(ConfigPath, InvPane.getPosition())
 end
