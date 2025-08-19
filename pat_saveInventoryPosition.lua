@@ -18,7 +18,7 @@ function init()
 
   local clamp = function(n, min, max) return math.max(min, math.min(n, max)) end
   
-  local size = InvPane:getSize()
+  local size = InvPane.getSize()
   local bounds = interface.bindCanvas("voice"):size()
   pos[1] = clamp(pos[1], 0, bounds[1] - size[1])
   pos[2] = clamp(pos[2], 0, bounds[2] - size[2])
